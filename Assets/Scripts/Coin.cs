@@ -8,12 +8,13 @@ public class Coin : MonoBehaviour
     private bool judged = false;
     private CoinState coinState = CoinState.Active;
 
+    public CoinConfig Config;
     public float moveSpeed = 0.3f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ApplyConfig();
     }
 
     // Update is called once per frame
@@ -30,6 +31,14 @@ public class Coin : MonoBehaviour
                 break;
         }
         
+    }
+
+    public void ApplyConfig() {
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.sprite =  Config.Sprite;
+        var collider = GetComponent<CircleCollider2D>();
+        var extents = renderer.sprite.bounds.extents;
+        collider.radius = extents.x;
     }
 
     private void OnMouseDown() {

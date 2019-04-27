@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9b841b4e4d24e13a0f8b9320489123, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  Coins:
+  - CoinID: 0
+    Amount: 5
+    Sprite: {fileID: 21300000, guid: f6b79060f58f9344989277d7c5db0639, type: 3}
+    IsDummy: 0
+  - CoinID: 1
+    Amount: 10
+    Sprite: {fileID: 21300000, guid: c082a71b35b02474db1363e458d3db47, type: 3}
+    IsDummy: 0
+  - CoinID: 2
+    Amount: 25
+    Sprite: {fileID: 21300000, guid: 264e7ba02df99714dae02cace6a01ba7, type: 3}
+    IsDummy: 0
+  - CoinID: 3
+    Amount: 50
+    Sprite: {fileID: 21300000, guid: 3462d61afa1f7ae4296db4b4fbaf7553, type: 3}
+    IsDummy: 0
+  - CoinID: 4
+    Amount: 100
+    Sprite: {fileID: 21300000, guid: c7f4540a8ac669947bf49235b98800f9, type: 3}
+    IsDummy: 0
+  - CoinID: 5
+    Amount: 200
+    Sprite: {fileID: 21300000, guid: 98ee011f885d954468d51ddf5ef137ff, type: 3}
+    IsDummy: 0
+  - CoinID: 6
+    Amount: 0
+    Sprite: {fileID: 21300000, guid: 78f5f88f3a7c0314a9f3999e331ecf87, type: 3}
+    IsDummy: 1
+  CoinSpawns: []
