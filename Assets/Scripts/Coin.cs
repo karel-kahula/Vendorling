@@ -15,18 +15,20 @@ public class Coin : MonoBehaviour
     void Start()
     {
         ApplyConfig();
+        gameObject.SendMessageUpwards("CoinAdded");
     }
 
     // Update is called once per frame
     void Update()
     {
-        var exit = new Vector2(5f, transform.position.y);
-
+        // this is kinda ugly
         switch(coinState) {
             case CoinState.Accepted:
-                transform.Translate(exit * Time.deltaTime);
+                transform.Translate(new Vector2(5f, transform.position.y) * Time.deltaTime);
                 break;
             case CoinState.Rejected:
+                transform.Translate(new Vector2(-5f, transform.position.y) * Time.deltaTime);
+                break;
             default:
                 break;
         }
@@ -43,7 +45,6 @@ public class Coin : MonoBehaviour
 
     private void OnMouseDown() {
         if(!judged) {
-            var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
             offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
     }
@@ -63,9 +64,11 @@ public class Coin : MonoBehaviour
         judged = true;
         if(collision.gameObject.name == "AcceptZone") {
             coinState = CoinState.Accepted;
+            gameObject.SendMessageUpwards("CoinAccepted", Config);
         }
         else {
             coinState = CoinState.Rejected;
+            gameObject.SendMessageUpwards("CoinRejected", Config);
         }
     }
 }
