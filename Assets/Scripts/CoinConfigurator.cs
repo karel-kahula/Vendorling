@@ -112,9 +112,8 @@ public class CoinConfiguratorWindow : EditorWindow
         var targetPath = Filename;
         if (targetPath.Length == 0)
         {
-            Filename = targetPath = "Assets/Config/coinSpawn.asset";
+            Filename = targetPath = AssetDatabase.GenerateUniqueAssetPath("Assets/Config/Spawns/Spawn.asset");
         }
-        var uniquePath = AssetDatabase.GenerateUniqueAssetPath(targetPath);
 
         var coins = GameObject.FindObjectsOfType<Coin>();
         spawnAsset.TargetAmount = TargetAmount;
@@ -126,7 +125,7 @@ public class CoinConfiguratorWindow : EditorWindow
             spawn.Rotation = coin.transform.rotation;
             spawnAsset.Spawns.Add(spawn);
         }
-        AssetDatabase.CreateAsset(spawnAsset, uniquePath);
+        AssetDatabase.CreateAsset(spawnAsset, targetPath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();

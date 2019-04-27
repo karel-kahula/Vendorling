@@ -41,3 +41,4 @@ MonoBehaviour:
     Amount: 0
     Sprite: {fileID: 21300000, guid: 78f5f88f3a7c0314a9f3999e331ecf87, type: 3}
     IsDummy: 1
+  CoinSpawns: []
