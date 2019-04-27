@@ -39,10 +39,10 @@ public class MouseController : MonoBehaviour {
 
                 if(swipeTimeMax > swipeDeltaTime && swipeDistanceMin < Mathf.Abs(swipeDeltaX)) {
                     if(swipeDeltaX > 0) {
-                        Debug.Log($"right {swipeDeltaX}");
+                        //Debug.Log($"right {swipeDeltaX}");
                     }
                     else {
-                        Debug.Log($"left {swipeDeltaX}");
+                        //Debug.Log($"left {swipeDeltaX}");
                     }
                     selectedCoin = null;
                 }
