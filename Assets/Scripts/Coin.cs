@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     private bool judged = false;
     private CoinState coinState = CoinState.Active;
 
+    public CoinConfig Config;
     public float moveSpeed = 0.3f;
 
     // Start is called before the first frame update
