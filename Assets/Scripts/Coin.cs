@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    private enum CoinState { Active, Accepted, Rejected }
+
     private Vector2 offset;
     private bool judged = false;
+    private CoinState coinState = CoinState.Active;
 
     public float moveSpeed = 0.3f;
 
@@ -18,6 +19,16 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var exit = new Vector2(5f, transform.position.y);
+
+        switch(coinState) {
+            case CoinState.Accepted:
+                transform.Translate(exit * Time.deltaTime);
+                break;
+            case CoinState.Rejected:
+            default:
+                break;
+        }
         
     }
 
@@ -35,29 +46,17 @@ public class Coin : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D() {
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         judged = true;
         if(collision.gameObject.name == "AcceptZone") {
-            StartCoroutine("AcceptCoin");
+            coinState = CoinState.Accepted;
         }
         else {
-            //StartCoroutine("RejectCoin");
-        }
-    }
-
-    private IEnumerator AcceptCoin() {
-        Debug.Log("AcceptCoin");
-        bool exited = false;
-        var exit = new Vector2(5f, transform.position.y);
-
-        while (!exited) {
-            transform.position = Vector2.MoveTowards(transform.position, exit, moveSpeed);
-            exited = Vector2.Distance(transform.position, exit) == 0;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        if(exited) {
-            Destroy(gameObject);
+            coinState = CoinState.Rejected;
         }
     }
 }
