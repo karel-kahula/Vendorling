@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     [Range(0, 1)]
     public float MaxHealthPoints = 1f;
     public float HealthPoints;
+    public GameConfig gameConfig;
+    public Coin coinPrefab;
 
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
@@ -27,6 +29,22 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        StartRound();
+    }
+
+    private void StartRound() {
+        var randomIndex = Random.Range(0, gameConfig.CoinSpawns.Count);
+        Debug.Log(randomIndex);
+        var spawn = gameConfig.CoinSpawns[randomIndex];
+        TargetSum = spawn.TargetAmount;
+        gameState = GameState.Evaluating;
+
+        foreach(var c in spawn.Spawns) {
+            var objC = Instantiate(coinPrefab, c.Position, c.Rotation, transform);
+            var coin = objC.GetComponent<Coin>();
+            coin.Config = gameConfig.GetCoinConfig(c.CoinID);
+            coin.ApplyConfig();
+        }
     }
 
     // Update is called once per frame
@@ -70,5 +88,6 @@ public class GameManager : MonoBehaviour {
             HealthPoints = Mathf.Max(HealthPoints - FailPenalty, 0);
         }
         Debug.Log($"Health Points: {HealthPoints}");
+        StartRound();
     }
 }
