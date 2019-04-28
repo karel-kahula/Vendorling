@@ -87,5 +87,6 @@ public class GameManager : MonoBehaviour {
             HealthPoints = Mathf.Max(HealthPoints - FailPenalty, 0);
         }
         Debug.Log($"Health Points: {HealthPoints}");
+        StartRound();
     }
 }
