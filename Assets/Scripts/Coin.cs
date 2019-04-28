@@ -7,14 +7,18 @@ public class Coin : MonoBehaviour
     private Vector2 offset;
     private bool judged = false;
     private CoinState coinState = CoinState.Active;
+    private Rigidbody2D rigidBody;
 
     public CoinConfig Config;
-    public float moveSpeed = 15f;
+    public float MoveSpeed = 50f;
+    public float MoveClamp = 60f;
+    public float CoinDropSpeed = 15f;
 
     // Start is called before the first frame update
     void Start()
     {
         ApplyConfig();
+        rigidBody = GetComponent<Rigidbody2D>();
         gameObject.SendMessageUpwards("CoinAdded");
     }
 
@@ -24,10 +28,10 @@ public class Coin : MonoBehaviour
         // this is kinda ugly
         switch(coinState) {
             case CoinState.Accepted:
-                transform.Translate(new Vector2(moveSpeed, 0) * Time.deltaTime, Space.World);
+                transform.Translate(new Vector2(CoinDropSpeed, 0) * Time.deltaTime, Space.World);
                 break;
             case CoinState.Rejected:
-                transform.Translate(new Vector2(-moveSpeed, 0) * Time.deltaTime, Space.World);
+                transform.Translate(new Vector2(-CoinDropSpeed, 0) * Time.deltaTime, Space.World);
                 break;
             default:
                 break;
@@ -51,8 +55,13 @@ public class Coin : MonoBehaviour
 
     private void OnMouseDrag() {
         if(!judged) {
-            var screenPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector2(screenPos.x, screenPos.y) + offset;
+            var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var targetDirection = targetPos - transform.position;
+            var force = Vector2.ClampMagnitude(targetDirection * MoveSpeed, MoveClamp);
+            rigidBody.velocity = force;
+        }
+        else {
+            rigidBody.velocity = Vector2.zero;
         }
     }
 
