@@ -1046,18 +1046,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 557892857}
-    - target: {fileID: 87298197, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TogglePause
+    - target: {fileID: 1625666709, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
+      propertyPath: ScoreText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 34380723, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 557892857}
-    - target: {fileID: 34380723, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnPause
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
 --- !u!1 &1878209581

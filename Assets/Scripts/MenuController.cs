@@ -9,7 +9,9 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         var score = PlayerPrefs.GetInt("HighScore", 0);
-        ScoreText.text = score.ToString();
+        if(ScoreText != null) {
+            ScoreText.text = score.ToString();
+        }
     }
 
 
