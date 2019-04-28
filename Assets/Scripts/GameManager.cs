@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour {
     public float HealthDrain = 0.01f;
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
+    public float FailCameraShakeDuration = 0.5f;
     public GameConfig gameConfig;
     public Coin CoinPrefab;
     public HUDManager HUD;
     public GameState gameState;
+    public CameraShaker cameraShaker;
 
     public enum GameState {
         Evaluating,
@@ -119,6 +121,7 @@ public class GameManager : MonoBehaviour {
         }
         else {
             ChangeHealth(-FailPenalty);
+            cameraShaker.TriggerShake(FailCameraShakeDuration);
             HUD.TriggerFailure();
         }
         if(HealthPoints == 0) {

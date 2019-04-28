@@ -508,10 +508,12 @@ MonoBehaviour:
   HealthDrain: 0.02
   SuccessReward: 0.25
   FailPenalty: 0.15
+  FailCameraShakeDuration: 0.5
   gameConfig: {fileID: 11400000, guid: 03cedab210dde44f8b983e38281acbf2, type: 2}
   CoinPrefab: {fileID: 776989833, guid: 65aa94f70771844a294fa8ee482b83f4, type: 3}
   HUD: {fileID: 274346268}
-  gameState: 5
+  gameState: 0
+  cameraShaker: {fileID: 1030716692}
 --- !u!4 &557892858
 Transform:
   m_ObjectHideFlags: 0
@@ -885,6 +887,7 @@ GameObject:
   - component: {fileID: 1030716689}
   - component: {fileID: 1030716688}
   - component: {fileID: 1030716691}
+  - component: {fileID: 1030716692}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -910,7 +913,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -971,6 +974,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wantedX: 9
   _wantedY: 16
+--- !u!114 &1030716692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030716687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8add22732b44b549d80ee2d3d88fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0
+  shakeMagnitude: 0.7
+  dampingSpeed: 1
+  maxFrameDelta: 0.1
+  directionChance: 0.05
 --- !u!1 &1252642017
 GameObject:
   m_ObjectHideFlags: 0
