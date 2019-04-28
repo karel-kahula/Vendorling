@@ -7,23 +7,28 @@ public class GameManager : MonoBehaviour {
     public int TargetSum;
     [Range(0, 1)]
     public float MaxHealthPoints = 1f;
+    [Range(0, 1)]
     public float HealthPoints;
-    public GameConfig gameConfig;
-    public Coin CoinPrefab;
+    [Range(0, 1)]
+    public float InitialHealth = 0.5f;
     public float HealthDrain = 0.01f;
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
+    public GameConfig gameConfig;
+    public Coin CoinPrefab;
     public HUDManager HUD;
+    public GameState gameState;
 
-    private enum GameState {
+    public enum GameState {
         Evaluating,
         EvaluationComplete,
         SuccessfulRound,
         FailedRound,
-        Waiting
+        Waiting,
+        Ready,
+        GameOver
     }
 
-    private GameState gameState;
     private int CurrentSum = 0;
     private int CoinCounter = 0;
     private bool DummyCoinAccepted = false;
@@ -31,10 +36,12 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         HUD.Score = 0;
+        HealthPoints = InitialHealth;
         StartRound();
     }
 
     private void StartRound() {
+        Time.timeScale = 1;
         var randomIndex = Random.Range(0, gameConfig.CoinSpawns.Count);
         Debug.Log(randomIndex);
         var spawn = gameConfig.CoinSpawns[randomIndex];
@@ -55,16 +62,19 @@ public class GameManager : MonoBehaviour {
     void Update() {
         switch (gameState) {
             case (GameState.Evaluating):
-                if (CoinCounter == 0) {
-                    Debug.Log("no coins left");
-                    gameState = GameState.EvaluationComplete;
-                    CheckEvaulation();
+                if(HealthPoints == 0) {
+                    GameOver();
                 }
                 else {
-                    if(gameState == GameState.Evaluating) {
-                        ChangeHealth(-HealthDrain * Time.deltaTime);
+                    ChangeHealth(-HealthDrain * Time.deltaTime);
+                    if (CoinCounter == 0) {
+                        Debug.Log("no coins left");
+                        CheckEvaulation();
                     }
                 }
+                break;
+            case (GameState.Ready):
+                StartRound();
                 break;
             default:
                 break;
@@ -95,18 +105,28 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"Current Sum: {CurrentSum}");
 
         if(CurrentSum == TargetSum) {
+            HUD.Score += 1;
             ChangeHealth(SuccessReward);
         }
         else {
             ChangeHealth(-FailPenalty);
         }
-        StartRound();
-
-        HUD.Score += 1;
+        if(HealthPoints == 0) {
+            GameOver();
+        }
+        else {
+            gameState = GameState.Ready;
+        }
     }
 
     private void ChangeHealth(float hp) {
         HealthPoints = Mathf.Clamp01(HealthPoints + hp);
     }
 
+    private void GameOver() {
+        gameState = GameState.GameOver;
+        Time.timeScale = 0;
+        HUD.ShowGameOverScreen();
+
+    }
 }

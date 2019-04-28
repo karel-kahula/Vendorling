@@ -18,4 +18,8 @@ public class HUDManager : MonoBehaviour
        PriceElement.Amount = Price;
        HealthMeter.Health = Health; 
     }
+
+    public void ShowGameOverScreen() {
+        HealthMeter.gameObject.SetActive(false);
+    }
 }
