@@ -2003,6 +2003,8 @@ MonoBehaviour:
     Face: {fileID: 21300000, guid: 67d5076a5172ad3459b646d5872e2eb5, type: 3}
   CurrentTarget: -104
   HealthBarSpeed: 0.5
+  SuccessFace: {fileID: 21300000, guid: 5d3f2c229d6acef41939006ab070922a, type: 3}
+  RejectFace: {fileID: 21300000, guid: f867946212df8464182f1228d86c2742, type: 3}
 --- !u!1 &2592319086363132791
 GameObject:
   m_ObjectHideFlags: 0

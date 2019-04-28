@@ -31,10 +31,12 @@ public class HUDManager : MonoBehaviour
 
     public void TriggerSuccess() {
         BGAnimator.SetTrigger("Success");
+        HealthMeter.OverrideFace(HealthMeter.SuccessFace, 0.5f);
     }
 
     public void TriggerFailure() {
         BGAnimator.SetTrigger("Fail");
+        HealthMeter.OverrideFace(HealthMeter.RejectFace, 0.5f);
     }
 
     public void TriggerGameOver() {
