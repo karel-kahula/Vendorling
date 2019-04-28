@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour
     private CoinState coinState = CoinState.Active;
 
     public CoinConfig Config;
-    public float moveSpeed = 0.3f;
+    public float moveSpeed = 15f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +24,10 @@ public class Coin : MonoBehaviour
         // this is kinda ugly
         switch(coinState) {
             case CoinState.Accepted:
-                transform.Translate(new Vector2(5f, transform.position.y) * Time.deltaTime);
+                transform.Translate(new Vector2(moveSpeed, 0) * Time.deltaTime, Space.World);
                 break;
             case CoinState.Rejected:
-                transform.Translate(new Vector2(-5f, transform.position.y) * Time.deltaTime);
+                transform.Translate(new Vector2(-moveSpeed, 0) * Time.deltaTime, Space.World);
                 break;
             default:
                 break;
