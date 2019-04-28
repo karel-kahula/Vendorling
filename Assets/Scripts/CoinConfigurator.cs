@@ -10,8 +10,6 @@ public class CoinConfigurator : MonoBehaviour
     public Coin CoinPrefab;
 }
 
-
-//[CustomEditor(typeof(CoinConfigurator))]
 public class CoinConfiguratorWindow : EditorWindow
 {
     public string Filename = "";
