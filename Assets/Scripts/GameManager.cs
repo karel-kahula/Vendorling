@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [Range(5, 200)]
@@ -14,10 +13,12 @@ public class GameManager : MonoBehaviour {
     public float HealthDrain = 0.01f;
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
+    public float FailCameraShakeDuration = 0.5f;
     public GameConfig gameConfig;
     public Coin CoinPrefab;
     public HUDManager HUD;
     public GameState gameState;
+    public CameraShaker cameraShaker;
 
     public enum GameState {
         Evaluating,
@@ -26,7 +27,8 @@ public class GameManager : MonoBehaviour {
         FailedRound,
         Waiting,
         Ready,
-        GameOver
+        GameOver,
+        Starting
     }
 
     private int CurrentSum = 0;
@@ -35,19 +37,23 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        Time.timeScale = 1;
+        Debug.Log($"Start Gamestate {gameState}");
+        SetupGame();
+    }
+
+    private void SetupGame() {
         HUD.Score = 0;
         HealthPoints = InitialHealth;
+        Debug.Log("setupgame");
         StartRound();
     }
 
     private void StartRound() {
-        Time.timeScale = 1;
         var randomIndex = Random.Range(0, gameConfig.CoinSpawns.Count);
-        Debug.Log(randomIndex);
         var spawn = gameConfig.CoinSpawns[randomIndex];
         TargetSum = spawn.TargetAmount;
         CurrentSum = 0;
-        gameState = GameState.Evaluating;
         HUD.Price = TargetSum;
 
         foreach(var c in spawn.Spawns) {
@@ -56,6 +62,8 @@ public class GameManager : MonoBehaviour {
             coin.Config = gameConfig.GetCoinConfig(c.CoinID);
             coin.ApplyConfig();
         }
+
+        gameState = GameState.Starting;
     }
 
     // Update is called once per frame
@@ -85,6 +93,8 @@ public class GameManager : MonoBehaviour {
 
     public void CoinAdded() {
         CoinCounter++;
+        gameState = GameState.Evaluating;
+        Debug.Log($"Coins registered {CoinCounter}");
     }
 
     public void CoinAccepted(CoinConfig config) {
@@ -111,6 +121,7 @@ public class GameManager : MonoBehaviour {
         }
         else {
             ChangeHealth(-FailPenalty);
+            cameraShaker.TriggerShake(FailCameraShakeDuration);
             HUD.TriggerFailure();
         }
         if(HealthPoints == 0) {
@@ -126,9 +137,18 @@ public class GameManager : MonoBehaviour {
     }
 
     private void GameOver() {
+        Debug.Log("gameover");
         gameState = GameState.GameOver;
         Time.timeScale = 0;
         HUD.ShowGameOverScreen();
 
+        var score = PlayerPrefs.GetInt("HighScore", 0);
+        if (HUD.Score > score)
+            PlayerPrefs.SetInt("HighScore", HUD.Score);
+
+    }
+
+    public void NewGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
