@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
+    public HUDManager HUD;
 
     private enum GameState {
         Evaluating,
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        HUD.Score = 0;
         StartRound();
     }
 
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour {
         var spawn = gameConfig.CoinSpawns[randomIndex];
         TargetSum = spawn.TargetAmount;
         gameState = GameState.Evaluating;
+        HUD.Price = TargetSum;
 
         foreach(var c in spawn.Spawns) {
             var objC = Instantiate(coinPrefab, c.Position, c.Rotation, transform);
@@ -60,6 +63,8 @@ public class GameManager : MonoBehaviour {
             default:
                 break;
         }
+
+        HUD.Health = HealthPoints;
     }
 
     public void CoinAdded() {
@@ -89,5 +94,7 @@ public class GameManager : MonoBehaviour {
         }
         Debug.Log($"Health Points: {HealthPoints}");
         StartRound();
+
+        HUD.Score += 1;
     }
 }
