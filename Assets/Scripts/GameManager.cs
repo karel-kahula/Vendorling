@@ -130,5 +130,9 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0;
         HUD.ShowGameOverScreen();
 
+        var score = PlayerPrefs.GetInt("HighScore", 0);
+        if (HUD.Score > score)
+            PlayerPrefs.SetInt("HighScore", HUD.Score);
+
     }
 }
