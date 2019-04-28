@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,6 +18,8 @@ public class CoinConfiguratorWindow : EditorWindow
 {
     public string Filename = "";
     public int TargetAmount;
+
+    public int SolutionCount;
 
     void OnGUI()
     {
@@ -46,6 +49,7 @@ public class CoinConfiguratorWindow : EditorWindow
         Filename = EditorGUILayout.TextField("Filename:", Filename);
         TargetAmount = EditorGUILayout.IntField("Target amount:", TargetAmount);
 
+        GUILayout.BeginHorizontal();
         if (GUILayout.Button("Load Configuration")) {
             EditorGUIUtility.ShowObjectPicker<CoinSpawns>(null, true, "", EditorGUIUtility.GetControlID(FocusType.Passive) + 100);
         }
@@ -58,11 +62,42 @@ public class CoinConfiguratorWindow : EditorWindow
         {
             SaveConfiguration();
         }
+        GUILayout.EndHorizontal();
 
+        GUILayout.BeginHorizontal();
+        bool newConfig = false;
         if (GUILayout.Button("New Configuration"))
         {
             NewConfiguration();
+            newConfig = true;
         }
+
+        if (GUILayout.Button("New Random Configuration"))
+        {
+            NewConfiguration();
+            var coinConfigs = SolutionHelper.GenerateRandomValues(config.GameConfig.Coins);
+            foreach (var cfg in coinConfigs)
+            {
+                SpawnCoin(config.SpawnArea.bounds, config.CoinPrefab, cfg);
+            }
+            newConfig = true;
+        }
+        GUILayout.EndHorizontal();
+
+        if (newConfig || GUILayout.Button("Suggest sum")) {
+            var coins = GameObject.FindObjectsOfType<Coin>();
+            var amounts = coins.Select(coin => coin.Config.Amount).ToList();
+            TargetAmount = SolutionHelper.PickSumFor(amounts);
+            newConfig = true;
+        }
+
+        if (newConfig || GUILayout.Button("Update Solution Count: " + SolutionCount)) {
+            // expensive to calculate without keeping a list of coins around
+            var coins = GameObject.FindObjectsOfType<Coin>();
+            var amounts = coins.Select(coin => coin.Config.Amount).ToList();
+            SolutionCount = SolutionHelper.NumberSolutions(amounts, TargetAmount);
+        }
+
     }
 
     [MenuItem("Window/Configurator")]
@@ -70,6 +105,9 @@ public class CoinConfiguratorWindow : EditorWindow
     {
         //Show existing window instance. If one doesn't exist, make one.
         EditorWindow.GetWindow(typeof(CoinConfiguratorWindow));
+    }
+
+    private void UpdateSolutionCount() {
     }
 
     private void SpawnCoin(Bounds bounds, Coin coinPrefab, CoinConfig cfg) {
@@ -135,9 +173,7 @@ public class CoinConfiguratorWindow : EditorWindow
 
     private void DestroyCoins() {
         var coins = GameObject.FindObjectsOfType<Coin>();
-        Debug.Log("search");
         foreach(var coin in coins) {
-            Debug.Log("destroy");
             DestroyImmediate(coin.gameObject);
         }
     }
