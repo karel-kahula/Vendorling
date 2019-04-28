@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
     private int CurrentSum = 0;
     private int CoinCounter = 0;
     private bool DummyCoinAccepted = false;
+    private float RoundPauseTime;
 
     // Start is called before the first frame update
     void Start() {
@@ -85,7 +86,9 @@ public class GameManager : MonoBehaviour {
                 }
                 break;
             case (GameState.Ready):
-                StartRound();
+                RoundPauseTime -= Time.deltaTime;
+                if (RoundPauseTime < 0)
+                    StartRound();
                 break;
             default:
                 break;
@@ -135,7 +138,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"Current Sum: {CurrentSum}");
 
         if(CurrentSum == TargetSum || 
-           (CurrentSum == 0 && currentCoinSpawns.IsSolvable)) {
+           (CurrentSum == 0 && !currentCoinSpawns.IsSolvable)) {
             HUD.Score += 1;
             ChangeHealth(SuccessReward);
             HUD.TriggerSuccess();
@@ -150,6 +153,7 @@ public class GameManager : MonoBehaviour {
         }
         else {
             gameState = GameState.Ready;
+            RoundPauseTime = 0.5f;
         }
     }
 
