@@ -147,8 +147,4 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.SetInt("HighScore", HUD.Score);
 
     }
-
-    public void NewGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }
