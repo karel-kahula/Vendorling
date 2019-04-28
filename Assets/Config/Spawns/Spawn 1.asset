@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Spawn 1
   m_EditorClassIdentifier: 
   Spawns:
-  - CoinID: 4
-    Position: {x: 2.8, y: 2.84}
-    Rotation: {x: 0, y: 0, z: 0.36023813, w: 0.9328604}
   - CoinID: 0
     Position: {x: -1.8913918, y: -6.576838}
     Rotation: {x: 0, y: 0, z: -0.997546, w: 0.070013925}
+  - CoinID: 4
+    Position: {x: 2.8, y: 2.84}
+    Rotation: {x: 0, y: 0, z: 0.36023813, w: 0.9328604}
   TargetAmount: 100
   IsSolvable: 0

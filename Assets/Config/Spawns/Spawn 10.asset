@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Spawn 10
   m_EditorClassIdentifier: 
   Spawns:
-  - CoinID: 2
-    Position: {x: -3.5, y: 4.65}
-    Rotation: {x: 0, y: 0, z: -0.6336539, w: 0.7736167}
-  - CoinID: 2
-    Position: {x: 3.5242498, y: -2.1842613}
-    Rotation: {x: 0, y: 0, z: 0.4755227, w: 0.8797034}
-  - CoinID: 1
-    Position: {x: 3.61, y: -7.01}
-    Rotation: {x: 0, y: 0, z: -0.90346706, w: 0.42865768}
-  - CoinID: 3
-    Position: {x: 4.078883, y: 5.573767}
-    Rotation: {x: 0, y: 0, z: 0.036632013, w: 0.99932873}
+  - CoinID: 0
+    Position: {x: -2.4205012, y: -6.2142134}
+    Rotation: {x: 0, y: 0, z: 0.8129346, w: 0.58235514}
   - CoinID: 3
     Position: {x: -1.85, y: 0}
     Rotation: {x: 0, y: 0, z: 0.5328034, w: 0.84623903}
-  - CoinID: 0
-    Position: {x: -2.4205012, y: -6.2142134}
-    Rotation: {x: 0, y: 0, z: 0.8129345, w: 0.5823551}
+  - CoinID: 3
+    Position: {x: 4.078883, y: 5.573767}
+    Rotation: {x: 0, y: 0, z: 0.036632016, w: 0.99932885}
+  - CoinID: 1
+    Position: {x: 3.61, y: -7.01}
+    Rotation: {x: 0, y: 0, z: -0.90346706, w: 0.42865768}
+  - CoinID: 2
+    Position: {x: 3.5242498, y: -2.1842613}
+    Rotation: {x: 0, y: 0, z: 0.47552273, w: 0.87970346}
+  - CoinID: 2
+    Position: {x: -3.5, y: 4.65}
+    Rotation: {x: 0, y: 0, z: -0.6336539, w: 0.7736167}
   TargetAmount: 105
-  IsSolvable: 0
+  IsSolvable: 1
