@@ -57,7 +57,9 @@ public class GameManager : MonoBehaviour {
         HUD.Price = TargetSum;
 
         foreach(var c in spawn.Spawns) {
-            var objC = Instantiate(CoinPrefab, c.Position, c.Rotation, transform);
+            var rotation = Random.rotation;
+            rotation.x = rotation.y = 0;
+            var objC = Instantiate(CoinPrefab, c.Position, rotation, transform);
             var coin = objC.GetComponent<Coin>();
             coin.Config = gameConfig.GetCoinConfig(c.CoinID);
             coin.ApplyConfig();

@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20a03b44f54dc43859287654b762e139, type: 3}
-  m_Name: Spawn 3
+  m_Name: OldSpawn 4
   m_EditorClassIdentifier: 
   Spawns:
   - CoinID: 3
-    Position: {x: 0.56822586, y: -9.096089}
-    Rotation: {x: 0, y: 0, z: -0.689513, w: 0.72427326}
+    Position: {x: 4.3957806, y: -0.86296177}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+  - CoinID: 0
+    Position: {x: -3.9248216, y: 6.583975}
+    Rotation: {x: -0, y: -0, z: -0.22323702, w: 0.9747643}
   - CoinID: 1
-    Position: {x: -4.662073, y: -2.4686055}
-    Rotation: {x: 0, y: 0, z: 0.9082688, w: 0.41838703}
-  - CoinID: 5
-    Position: {x: 2.21, y: 4.31}
-    Rotation: {x: 0, y: 0, z: -0.22816797, w: 0.9736218}
-  TargetAmount: 210
+    Position: {x: -2.97, y: -10.19}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+  - CoinID: 1
+    Position: {x: -2.1291656, y: -1.1230731}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+  TargetAmount: 75
   IsSolvable: 0
