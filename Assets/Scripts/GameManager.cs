@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     public GameState gameState;
     public CameraShaker cameraShaker;
     public CoinSpawns currentCoinSpawns;
+    public AudioSource coinDropAccept;
+    public AudioSource coinDropReject;
 
     public enum GameState {
         Evaluating,
@@ -108,11 +110,13 @@ public class GameManager : MonoBehaviour {
         CoinCounter--;
         CurrentSum += config.Amount;
         DummyCoinAccepted = DummyCoinAccepted || config.IsDummy;
+        coinDropAccept?.Play();
     }
 
     public void CoinRejected(CoinConfig config) {
         Debug.Log($"CoinRejected {config.Amount}");
         CoinCounter--;
+        coinDropReject?.Play();
     }
 
     public void TogglePause() {
