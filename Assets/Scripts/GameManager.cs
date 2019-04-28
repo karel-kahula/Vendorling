@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public HUDManager HUD;
     public GameState gameState;
     public CameraShaker cameraShaker;
+    public CoinSpawns currentCoinSpawns;
 
     public enum GameState {
         Evaluating,
@@ -51,12 +52,12 @@ public class GameManager : MonoBehaviour {
 
     private void StartRound() {
         var randomIndex = Random.Range(0, gameConfig.CoinSpawns.Count);
-        var spawn = gameConfig.CoinSpawns[randomIndex];
-        TargetSum = spawn.TargetAmount;
+        currentCoinSpawns = gameConfig.CoinSpawns[randomIndex];
+        TargetSum = currentCoinSpawns.TargetAmount;
         CurrentSum = 0;
         HUD.Price = TargetSum;
 
-        foreach(var c in spawn.Spawns) {
+        foreach(var c in currentCoinSpawns.Spawns) {
             var rotation = Random.rotation;
             rotation.x = rotation.y = 0;
             var objC = Instantiate(CoinPrefab, c.Position, rotation, transform);
@@ -116,7 +117,8 @@ public class GameManager : MonoBehaviour {
         // do dummy coins have analagous value?
         Debug.Log($"Current Sum: {CurrentSum}");
 
-        if(CurrentSum == TargetSum) {
+        if(CurrentSum == TargetSum || 
+           (CurrentSum == 0 && currentCoinSpawns.IsSolvable)) {
             HUD.Score += 1;
             ChangeHealth(SuccessReward);
             HUD.TriggerSuccess();
