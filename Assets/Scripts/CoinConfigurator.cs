@@ -24,7 +24,7 @@ public class CoinConfiguratorWindow : EditorWindow
 
     void OnGUI()
     {
-        var config = GameObject.Find("ConfiguratorSettings").GetComponent<CoinConfigurator>();
+        var config = GameObject.Find("ConfiguratorSettings")?.GetComponent<CoinConfigurator>();
         if (!config)
             return;
 
