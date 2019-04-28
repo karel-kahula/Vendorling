@@ -107,9 +107,11 @@ public class GameManager : MonoBehaviour {
         if(CurrentSum == TargetSum) {
             HUD.Score += 1;
             ChangeHealth(SuccessReward);
+            HUD.TriggerSuccess();
         }
         else {
             ChangeHealth(-FailPenalty);
+            HUD.TriggerFailure();
         }
         if(HealthPoints == 0) {
             GameOver();
