@@ -9,6 +9,7 @@ public class HUDManager : MonoBehaviour
     public Price PriceElement;
     public HealthMeter HealthMeter;
     public GameObject GameOverMenu;
+    public GameObject PauseMenu;
 
     public Animator BGAnimator;
 
@@ -34,5 +35,13 @@ public class HUDManager : MonoBehaviour
 
     public void TriggerFailure() {
         BGAnimator.SetTrigger("Fail");
+    }
+
+    public void OpenPauseMenu() {
+        PauseMenu.SetActive(true);
+    }
+
+    public void ClosePauseMenu() {
+        PauseMenu.SetActive(false);
     }
 }

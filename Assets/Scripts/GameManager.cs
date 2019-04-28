@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [Range(5, 200)]
@@ -29,7 +28,8 @@ public class GameManager : MonoBehaviour {
         Waiting,
         Ready,
         GameOver,
-        Starting
+        Starting,
+        Paused
     }
 
     private int CurrentSum = 0;
@@ -112,6 +112,23 @@ public class GameManager : MonoBehaviour {
         CoinCounter--;
     }
 
+    public void TogglePause() {
+        if(gameState == GameState.Paused) {
+            UnPause();
+        }
+        else if(gameState == GameState.Evaluating) {
+            gameState = GameState.Paused;
+            Time.timeScale = 0;
+            HUD.OpenPauseMenu();
+        }
+    }
+
+    public void UnPause() {
+        gameState = GameState.Evaluating;
+        Time.timeScale = 1;
+        HUD.ClosePauseMenu();
+    }
+
     private void CheckEvaulation() {
         // what if we accepted a dummy coin?
         // do dummy coins have analagous value?
@@ -149,6 +166,5 @@ public class GameManager : MonoBehaviour {
         var score = PlayerPrefs.GetInt("HighScore", 0);
         if (HUD.Score > score)
             PlayerPrefs.SetInt("HighScore", HUD.Score);
-
     }
 }
