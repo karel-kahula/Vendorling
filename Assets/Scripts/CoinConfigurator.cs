@@ -146,6 +146,7 @@ public class CoinConfiguratorWindow : EditorWindow
         var coinSpawns = (CoinSpawns)obj;
         Filename = AssetDatabase.GetAssetPath(coinSpawns);
         TargetAmount = coinSpawns.TargetAmount;
+        IsSolvable = coinSpawns.IsSolvable;
         DestroyCoins();
 
         foreach(var spawn in coinSpawns.Spawns)
@@ -163,6 +164,7 @@ public class CoinConfiguratorWindow : EditorWindow
 
         var coins = GameObject.FindObjectsOfType<Coin>();
         spawnAsset.TargetAmount = TargetAmount;
+        spawnAsset.IsSolvable = IsSolvable;
 
         foreach (var coin in coins) {
             var spawn = new CoinSpawn();

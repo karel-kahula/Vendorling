@@ -26,4 +26,4 @@ MonoBehaviour:
     Position: {x: -2.1291656, y: -1.1230731}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
   TargetAmount: 75
-  IsSolvable: 0
+  IsSolvable: 1

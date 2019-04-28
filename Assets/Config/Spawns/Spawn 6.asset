@@ -24,6 +24,6 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: -0.9045282, w: 0.42641383}
   - CoinID: 1
     Position: {x: 2.067225, y: -3.034571}
-    Rotation: {x: 0, y: 0, z: 0.99993676, w: 0.011242194}
+    Rotation: {x: 0, y: 0, z: 0.9999368, w: 0.011242195}
   TargetAmount: 65
-  IsSolvable: 0
+  IsSolvable: 1
