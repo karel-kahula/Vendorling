@@ -43,8 +43,26 @@ MonoBehaviour:
     IsDummy: 1
   CoinSpawns:
   - {fileID: 11400000, guid: 7a32da6bb4eda4d0787c896edfb8155d, type: 2}
-  - {fileID: 11400000, guid: 678de0779e350442c833b1b465276fbb, type: 2}
   - {fileID: 11400000, guid: beead7b4bf45d44bd8185d134b7176ee, type: 2}
-  - {fileID: 11400000, guid: 8de130c455add4e23939cce27c0f8949, type: 2}
   - {fileID: 11400000, guid: 637c944d31cdc4a058fe70fe03733224, type: 2}
-  - {fileID: 11400000, guid: 28890dc985c0040639c1d47f7c9bc244, type: 2}
+  - {fileID: 11400000, guid: 66389308f5a1246ccb1cdde6c4c80b6d, type: 2}
+  - {fileID: 11400000, guid: 47bd49981a91942a4a146cefd5c1d287, type: 2}
+  - {fileID: 11400000, guid: d384935ab3bc74230be717e24d40caa4, type: 2}
+  - {fileID: 11400000, guid: ff81e27dce20b4fe2a4686a9b5ceffa0, type: 2}
+  - {fileID: 11400000, guid: c4ef3a191f65640b79d348ddb1fec2eb, type: 2}
+  - {fileID: 11400000, guid: 630865a3961114176976fa57196b10fe, type: 2}
+  - {fileID: 11400000, guid: 760f69f23842e4799b27c712cf09efcc, type: 2}
+  - {fileID: 11400000, guid: 8eb9bff67528a4939bda4b84c34cc0bc, type: 2}
+  - {fileID: 11400000, guid: b48bfaac75b0246b68080bca9e9a02b0, type: 2}
+  - {fileID: 11400000, guid: c94e6a3ab97fe400795e17201b394b25, type: 2}
+  - {fileID: 11400000, guid: 5e43e172a097044ff975b0d5bc078609, type: 2}
+  - {fileID: 11400000, guid: 62d1d106b2fdf41a3bbeb108defbe166, type: 2}
+  - {fileID: 11400000, guid: 20f028f0d16ec494eb49be89cdf5fca7, type: 2}
+  - {fileID: 11400000, guid: c2c16a9992f634cb8bf6ac54ac9aee3b, type: 2}
+  - {fileID: 11400000, guid: cbb47ea359a994a918fc52e14c9621a0, type: 2}
+  - {fileID: 11400000, guid: 19c6a237ba87c4c96afb4d1e57becd58, type: 2}
+  - {fileID: 11400000, guid: 08151b7ee06d940759ee5e40bcd9638b, type: 2}
+  - {fileID: 11400000, guid: 9d6202ac91a764ad8a525bdf9d05a4b6, type: 2}
+  - {fileID: 11400000, guid: bf31b0764229e4554b3e6cbe74559425, type: 2}
+  - {fileID: 11400000, guid: a0109868b0f5d46648da5ebe1ee8463c, type: 2}
+  - {fileID: 11400000, guid: f99d2f8b3c1e24eb09356c350a924c70, type: 2}

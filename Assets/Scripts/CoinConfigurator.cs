@@ -20,6 +20,7 @@ public class CoinConfiguratorWindow : EditorWindow
     public int TargetAmount;
 
     public int SolutionCount;
+    public bool IsSolvable;
 
     void OnGUI()
     {
@@ -48,6 +49,7 @@ public class CoinConfiguratorWindow : EditorWindow
 
         Filename = EditorGUILayout.TextField("Filename:", Filename);
         TargetAmount = EditorGUILayout.IntField("Target amount:", TargetAmount);
+        IsSolvable = EditorGUILayout.Toggle("Solvable:", IsSolvable);
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Load Configuration")) {
@@ -75,11 +77,13 @@ public class CoinConfiguratorWindow : EditorWindow
         if (GUILayout.Button("New Random Configuration"))
         {
             NewConfiguration();
-            var coinConfigs = SolutionHelper.GenerateRandomValues(config.GameConfig.Coins);
+            var noDummies = config.GameConfig.Coins.Where(cfg => !cfg.IsDummy).ToList();
+            var coinConfigs = SolutionHelper.GenerateRandomValues(noDummies);
             foreach (var cfg in coinConfigs)
             {
                 SpawnCoin(config.SpawnArea.bounds, config.CoinPrefab, cfg);
             }
+
             newConfig = true;
         }
         GUILayout.EndHorizontal();
@@ -96,6 +100,7 @@ public class CoinConfiguratorWindow : EditorWindow
             var coins = GameObject.FindObjectsOfType<Coin>();
             var amounts = coins.Select(coin => coin.Config.Amount).ToList();
             SolutionCount = SolutionHelper.NumberSolutions(amounts, TargetAmount);
+            IsSolvable = SolutionCount > 0;
         }
 
     }
@@ -114,7 +119,9 @@ public class CoinConfiguratorWindow : EditorWindow
         var posX = Random.Range(bounds.min.x, bounds.max.x);
         var posY = Random.Range(bounds.min.y, bounds.max.y);
         var pos = new Vector3(posX, posY);
-        var rotation = Quaternion.identity;
+        var rotation = Random.rotation;
+        rotation.y = 0;
+        rotation.x = 0;
         var obj = Instantiate(coinPrefab, pos, rotation);
         var coin = obj.GetComponent<Coin>();
         coin.Config = cfg;

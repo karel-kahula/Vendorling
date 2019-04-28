@@ -7,4 +7,5 @@ using System.Collections.Generic;
 public class CoinSpawns : ScriptableObject {
     public List<CoinSpawn> Spawns = new List<CoinSpawn>();
     public int TargetAmount;
+    public bool IsSolvable;
 }

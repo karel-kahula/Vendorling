@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a03b44f54dc43859287654b762e139, type: 3}
+  m_Name: Spawn 14
+  m_EditorClassIdentifier: 
+  Spawns:
+  - CoinID: 3
+    Position: {x: 2.82174, y: -6.490542}
+    Rotation: {x: 0, y: 0, z: 0.7352088, w: 0.6778407}
+  - CoinID: 0
+    Position: {x: -4.4877386, y: -0.7869487}
+    Rotation: {x: 0, y: 0, z: 0.24852052, w: 0.9686267}
+  - CoinID: 3
+    Position: {x: 2.83, y: -0.24}
+    Rotation: {x: 0, y: 0, z: 0.653762, w: 0.7567002}
+  - CoinID: 1
+    Position: {x: -0.6574588, y: 3.44431}
+    Rotation: {x: 0, y: 0, z: -0.582181, w: 0.81305915}
+  - CoinID: 2
+    Position: {x: -2.7195683, y: -9.687656}
+    Rotation: {x: 0, y: 0, z: 0.7481798, w: 0.6634961}
+  TargetAmount: 105
+  IsSolvable: 0
