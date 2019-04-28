@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CoinConfigurator : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class CoinConfigurator : MonoBehaviour
     public Coin CoinPrefab;
 }
 
+#if UNITY_EDITOR
 public class CoinConfiguratorWindow : EditorWindow
 {
     public string Filename = "";
@@ -139,3 +142,4 @@ public class CoinConfiguratorWindow : EditorWindow
         }
     }
 }
+#endif
