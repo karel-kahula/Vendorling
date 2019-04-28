@@ -18,6 +18,6 @@ public class Price : MonoBehaviour
     }
 
     void UpdateAmount() {
-        Text.text = $"{Amount / 100.0:C}";
+        Text.text = $"${Amount / 100.0:C}";
     }
 }
