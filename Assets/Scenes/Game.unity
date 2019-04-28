@@ -296,7 +296,7 @@ MonoBehaviour:
   HealthDrain: 0.02
   SuccessReward: 0.25
   FailPenalty: 0.15
-  FailCameraShakeDuration: 0.5
+  CameraShakeDuration: 0.5
   gameConfig: {fileID: 11400000, guid: 03cedab210dde44f8b983e38281acbf2, type: 2}
   CoinPrefab: {fileID: 776989833, guid: 65aa94f70771844a294fa8ee482b83f4, type: 3}
   HUD: {fileID: 274346268}
@@ -860,6 +860,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.61566144
       objectReference: {fileID: 0}
+    - target: {fileID: 109094533, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2c59e7d92540cc4a8c909ff9c01f34b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}
 --- !u!1 &1878209581
