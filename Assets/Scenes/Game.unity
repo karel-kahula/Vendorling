@@ -212,9 +212,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetSum: 25
   MaxHealthPoints: 1
-  HealthPoints: 0.1
+  HealthPoints: 0.51
   gameConfig: {fileID: 11400000, guid: 03cedab210dde44f8b983e38281acbf2, type: 2}
-  coinPrefab: {fileID: 776989833, guid: 65aa94f70771844a294fa8ee482b83f4, type: 3}
+  CoinPrefab: {fileID: 776989833, guid: 65aa94f70771844a294fa8ee482b83f4, type: 3}
+  HealthDrain: 0.02
   SuccessReward: 0.25
   FailPenalty: 0.15
   HUD: {fileID: 274346268}
@@ -661,6 +662,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592319086329125041, guid: 7d8bad5abff18492a927de8d0f8fd7be,
+        type: 3}
+      propertyPath: CurrentTarget
+      value: -103.796875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592319086363132790, guid: 7d8bad5abff18492a927de8d0f8fd7be,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7869182
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592319086363132790, guid: 7d8bad5abff18492a927de8d0f8fd7be,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6170573
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d8bad5abff18492a927de8d0f8fd7be, type: 3}

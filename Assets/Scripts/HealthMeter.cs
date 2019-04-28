@@ -18,6 +18,8 @@ public class HealthMeter : MonoBehaviour
     public UnityEngine.UI.Image Needle;
     public UnityEngine.UI.Image Face;
     public List<FaceSpec> FaceSpecs;
+    public float CurrentTarget;
+    public float HealthBarSpeed = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,8 @@ public class HealthMeter : MonoBehaviour
 
     void UpdateSprites() {
         var target = Mathf.Lerp(AngleRange, -AngleRange, Health) - AngleOffset;
-        Needle.rectTransform.rotation = Quaternion.AngleAxis(target, Vector3.forward);
+        CurrentTarget = Mathf.Lerp(CurrentTarget, target, HealthBarSpeed);
+        Needle.rectTransform.rotation = Quaternion.AngleAxis(CurrentTarget, Vector3.forward);
 
         FaceSpec activeSpec = null;
         foreach(var spec in FaceSpecs) {
