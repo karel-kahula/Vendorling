@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"Current Sum: {CurrentSum}");
 
         if(CurrentSum == TargetSum || 
-           (CurrentSum == 0 && currentCoinSpawns.IsSolvable)) {
+           (CurrentSum == 0 && !currentCoinSpawns.IsSolvable)) {
             HUD.Score += 1;
             ChangeHealth(SuccessReward);
             HUD.TriggerSuccess();
