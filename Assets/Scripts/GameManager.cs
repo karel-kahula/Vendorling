@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public float SuccessReward = 0.25f;
     public float FailPenalty = 0.15f;
     public float CameraShakeDuration = 0.5f;
+    public float ScoreScalingFactor = 1.05f;
     public GameConfig gameConfig;
     public Coin CoinPrefab;
     public HUDManager HUD;
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour {
                     GameOver();
                 }
                 else {
-                    ChangeHealth(-HealthDrain * Time.deltaTime);
+                    ChangeHealth(-HealthDrain * Time.deltaTime * Mathf.Pow(ScoreScalingFactor, HUD.Score));
                     if (CoinCounter == 0) {
                         Debug.Log("no coins left");
                         CheckEvaulation();
