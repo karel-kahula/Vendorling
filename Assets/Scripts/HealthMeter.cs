@@ -37,7 +37,6 @@ public class HealthMeter : MonoBehaviour
         UpdateSprites();
     }
 
-
     void UpdateSprites() {
         var target = Mathf.Lerp(AngleRange, -AngleRange, Health) - AngleOffset;
         CurrentTarget = Mathf.Lerp(CurrentTarget, target, HealthBarSpeed);
@@ -54,7 +53,4 @@ public class HealthMeter : MonoBehaviour
         else
             Debug.Log($"No face spec for health {Health}");
     }
-
-
-
 }

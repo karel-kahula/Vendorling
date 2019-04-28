@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class HUDManager : MonoBehaviour
     public HUDScore ScoreElement;
     public Price PriceElement;
     public HealthMeter HealthMeter;
+    public GameObject GameOverMenu;
+
     public Animator BGAnimator;
 
     public int Score;
@@ -21,7 +24,8 @@ public class HUDManager : MonoBehaviour
     }
 
     public void ShowGameOverScreen() {
-        HealthMeter.gameObject.SetActive(false);
+        HealthMeter.Face.gameObject.SetActive(false);
+        GameOverMenu.SetActive(true);
     }
 
     public void TriggerSuccess() {
