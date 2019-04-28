@@ -166,5 +166,6 @@ public class GameManager : MonoBehaviour {
         var score = PlayerPrefs.GetInt("HighScore", 0);
         if (HUD.Score > score)
             PlayerPrefs.SetInt("HighScore", HUD.Score);
+        HUD.TriggerGameOver();
     }
 }

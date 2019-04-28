@@ -37,6 +37,10 @@ public class HUDManager : MonoBehaviour
         BGAnimator.SetTrigger("Fail");
     }
 
+    public void TriggerGameOver() {
+        BGAnimator.SetTrigger("GameOver");
+    }
+
     public void OpenPauseMenu() {
         PauseMenu.SetActive(true);
     }
