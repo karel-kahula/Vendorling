@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log(randomIndex);
         var spawn = gameConfig.CoinSpawns[randomIndex];
         TargetSum = spawn.TargetAmount;
+        gameState = GameState.Evaluating;
 
         foreach(var c in spawn.Spawns) {
             var objC = Instantiate(coinPrefab, c.Position, c.Rotation, transform);
