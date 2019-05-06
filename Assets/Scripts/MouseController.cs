@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Coin;
 
 public class MouseController : MonoBehaviour {
-    private GameObject selectedCoin;
+    private Coin selectedCoin;
     private Vector2 mouseDown;
     private Vector2 mouseUp;
     private DateTime mouseDownTime;
@@ -28,24 +29,16 @@ public class MouseController : MonoBehaviour {
             mouseDown = new Vector2(cursorPos.x, cursorPos.y);
             mouseDownTime = DateTime.UtcNow;
             var hit = Physics2D.Raycast(mouseDown, Vector2.zero, 10f);
-            selectedCoin = hit ? hit.transform.gameObject : null;
+            if(hit && hit.transform.tag == "coin") {
+                selectedCoin = hit.transform.gameObject.GetComponent<Coin>();
+                if(selectedCoin.coinState == CoinState.Idle)
+                    selectedCoin.coinState = CoinState.Selected;
+            }
         }
         if (Input.GetMouseButtonUp(0)) {
-            if(selectedCoin) {
-                mouseUp = new Vector2(cursorPos.x, cursorPos.y);
-                mouseUpTime = DateTime.UtcNow;
-                var swipeDeltaX = mouseUp.x - mouseDown.x;
-                var swipeDeltaTime = (float)mouseUpTime.Subtract(mouseDownTime).TotalSeconds;   
-
-                if(swipeTimeMax > swipeDeltaTime && swipeDistanceMin < Mathf.Abs(swipeDeltaX)) {
-                    if(swipeDeltaX > 0) {
-                        //Debug.Log($"right {swipeDeltaX}");
-                    }
-                    else {
-                        //Debug.Log($"left {swipeDeltaX}");
-                    }
-                    selectedCoin = null;
-                }
+            if(selectedCoin != null && selectedCoin.coinState == CoinState.Selected) {
+                selectedCoin.coinState = CoinState.Idle;
+                selectedCoin = null;
             }
         }
     }

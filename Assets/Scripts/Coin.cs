@@ -2,14 +2,14 @@
 
 public class Coin : MonoBehaviour
 {
-    private enum CoinState { Active, Accepted, Rejected }
+    public enum CoinState { Idle, Selected, Accepted, Rejected }
 
     private Vector2 offset;
     private bool judged = false;
-    private CoinState coinState = CoinState.Active;
     private Rigidbody2D rigidBody;
 
     public CoinConfig Config;
+    public CoinState coinState = CoinState.Idle;
     public float MoveSpeed = 50f;
     public float MoveClamp = 60f;
     public float CoinDropSpeed = 15f;
@@ -27,6 +27,17 @@ public class Coin : MonoBehaviour
     {
         // this is kinda ugly
         switch(coinState) {
+            case CoinState.Selected:
+                if(!judged) {
+                    var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    var targetDirection = targetPos - transform.position;
+                    var force = Vector2.ClampMagnitude(targetDirection * MoveSpeed, MoveClamp);
+                    rigidBody.velocity = force;
+                }
+                else {
+                    rigidBody.velocity = Vector2.zero;
+                }
+                break;
             case CoinState.Accepted:
                 transform.Translate(new Vector2(CoinDropSpeed, 0) * Time.deltaTime, Space.World);
                 break;
@@ -36,7 +47,6 @@ public class Coin : MonoBehaviour
             default:
                 break;
         }
-        
     }
 
     public void ApplyConfig() {
@@ -45,24 +55,6 @@ public class Coin : MonoBehaviour
         var collider = GetComponent<CircleCollider2D>();
         var extents = renderer.sprite.bounds.extents;
         collider.radius = extents.x;
-    }
-
-    private void OnMouseDown() {
-        if(!judged) {
-            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-    }
-
-    private void OnMouseDrag() {
-        if(!judged) {
-            var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var targetDirection = targetPos - transform.position;
-            var force = Vector2.ClampMagnitude(targetDirection * MoveSpeed, MoveClamp);
-            rigidBody.velocity = force;
-        }
-        else {
-            rigidBody.velocity = Vector2.zero;
-        }
     }
 
     private void OnTriggerExit2D() {
