@@ -31,13 +31,12 @@ public class MouseController : MonoBehaviour {
             var hit = Physics2D.Raycast(mouseDown, Vector2.zero, 10f);
             if(hit && hit.transform.tag == "coin") {
                 selectedCoin = hit.transform.gameObject.GetComponent<Coin>();
-                if(selectedCoin.coinState == CoinState.Idle)
-                    selectedCoin.coinState = CoinState.Selected;
+                selectedCoin = selectedCoin.Select() ? selectedCoin : null;
             }
         }
         if (Input.GetMouseButtonUp(0)) {
             if(selectedCoin != null && selectedCoin.coinState == CoinState.Selected) {
-                selectedCoin.coinState = CoinState.Idle;
+                selectedCoin.Drop();
                 selectedCoin = null;
             }
         }

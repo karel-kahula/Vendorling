@@ -4,7 +4,6 @@ public class Coin : MonoBehaviour
 {
     public enum CoinState { Idle, Selected, Accepted, Rejected }
 
-    private Vector2 offset;
     private bool judged = false;
     private Rigidbody2D rigidBody;
 
@@ -49,6 +48,21 @@ public class Coin : MonoBehaviour
         }
     }
 
+    public bool Select() {
+        bool selected = false;
+        if(coinState == CoinState.Idle) {
+            coinState = CoinState.Selected;
+            selected = true;
+        }
+        return selected;
+    }
+
+    public void Drop() {
+        if(coinState == CoinState.Selected) {
+            coinState = CoinState.Idle;
+        }
+    }
+
     public void ApplyConfig() {
         var renderer = GetComponent<SpriteRenderer>();
         renderer.sprite =  Config.Sprite;
@@ -58,18 +72,22 @@ public class Coin : MonoBehaviour
     }
 
     private void OnTriggerExit2D() {
-        Destroy(gameObject);
+        if(judged) {
+            Destroy(gameObject);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        judged = true;
-        if(collision.gameObject.name == "AcceptZone") {
-            coinState = CoinState.Accepted;
-            gameObject.SendMessageUpwards("CoinAccepted", Config);
-        }
-        else {
-            coinState = CoinState.Rejected;
-            gameObject.SendMessageUpwards("CoinRejected", Config);
+    private void OnTriggerStay2D(Collider2D collision) {
+        if(!judged && coinState == CoinState.Idle) {
+            judged = true;
+            if(collision.gameObject.name == "AcceptZone") {
+                coinState = CoinState.Accepted;
+                gameObject.SendMessageUpwards("CoinAccepted", Config);
+            }
+            else {
+                coinState = CoinState.Rejected;
+                gameObject.SendMessageUpwards("CoinRejected", Config);
+            }
         }
     }
 }
